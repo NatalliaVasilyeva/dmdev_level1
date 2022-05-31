@@ -3,12 +3,12 @@ package org.dmdev.natalliavasilyeva.collections.part1.task2;
 import java.util.List;
 import java.util.Objects;
 
-public class ImproveChat {
+public class Chat {
 
     private final String name;
     private final List<User> users;
 
-    public ImproveChat(String name, List<User> users) {
+    public Chat(String name, List<User> users) {
         this.name = name;
         this.users = users;
     }
@@ -25,8 +25,8 @@ public class ImproveChat {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ImproveChat chat = (ImproveChat) o;
-        return Objects.equals(name, chat.name) && Objects.equals(users, chat.users);
+        Chat chat = (Chat) o;
+        return Objects.equals(name, chat.getName()) && Objects.equals(users, chat.getUsers());
     }
 
     @Override

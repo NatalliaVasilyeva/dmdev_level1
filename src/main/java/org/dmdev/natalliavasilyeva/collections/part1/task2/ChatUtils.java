@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public final class ImproveChatUtil {
+public final class ChatUtils {
 
     private static final Integer MINIMUM_USER_AGE = 18;
 
-    public static List<User> getUsersOlderEighteenFromAllChats(List<ImproveChat> chats) {
+    public static List<User> getUsersOlderEighteenFromAllChats(List<Chat> chats) {
         List<User> users = new ArrayList<>();
-        for (ImproveChat chat : chats) {
+        for (Chat chat : chats) {
             for (User user : chat.getUsers()) {
                 if (user.getAge() >= MINIMUM_USER_AGE) {
                     users.add(user);
@@ -30,7 +30,7 @@ public final class ImproveChatUtil {
     }
 
     public static double calculateAverageUsersAgeUsingIterator(List<User> users) {
-        double sumOfUserAges = 0;
+        double sumOfUserAges = 0.0;
         int numberOfUsers = users.size();
         Iterator<User> iterator = users.listIterator();
         while (iterator.hasNext()) {

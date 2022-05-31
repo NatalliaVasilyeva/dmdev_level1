@@ -1,7 +1,7 @@
 package unit.org.dmdev.natalliavasilyeva.collections.part1.task1;
 
 import org.dmdev.natalliavasilyeva.collections.part1.task1.SimpleChat;
-import org.dmdev.natalliavasilyeva.collections.part1.task1.SimpleChatUtil;
+import org.dmdev.natalliavasilyeva.collections.part1.task1.SimpleChatUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -32,13 +32,13 @@ public class SimpleChatUtilTest {
         List<SimpleChat> chatsAfterSortingByDefault = new ArrayList<>(List.of(chat5, chat1, chat2));
 
         //when
-        List<SimpleChat> listOfChatsAfterRemoving = SimpleChatUtil.deleteChats(chats);
+        List<SimpleChat> listOfChatsAfterRemoving = SimpleChatUtils.deleteChats(chats);
 
         //then
         Assertions.assertEquals(expectedListOfChatsAfterRemoving, listOfChatsAfterRemoving);
 
         //when
-        List<SimpleChat> listOfChatsAfterSorting = SimpleChatUtil.sortChatsByUsersNumberAndName(listOfChatsAfterRemoving);
+        List<SimpleChat> listOfChatsAfterSorting = SimpleChatUtils.sortChatsByUsersNumberAndName(listOfChatsAfterRemoving);
 
         //then
         Assertions.assertEquals(expectedListOfChatsAfterSorting, listOfChatsAfterSorting);
