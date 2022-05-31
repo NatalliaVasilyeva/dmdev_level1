@@ -21,6 +21,12 @@ public class SimpleChat implements Comparable<SimpleChat> {
     }
 
     @Override
+    public int compareTo(SimpleChat chat) {
+
+        return name.compareTo(chat.getName());
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -39,10 +45,5 @@ public class SimpleChat implements Comparable<SimpleChat> {
                 "name='" + name + '\'' +
                 ", numberOfUsers=" + numberOfUsers +
                 '}';
-    }
-
-    @Override
-    public int compareTo(SimpleChat chat) {
-        return this.name.compareTo(chat.name);
     }
 }
