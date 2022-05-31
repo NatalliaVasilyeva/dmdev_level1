@@ -1,7 +1,7 @@
 package unit.org.dmdev.natalliavasilyeva.collections.part1.task2;
 
-import org.dmdev.natalliavasilyeva.collections.part1.task2.ImproveChat;
-import org.dmdev.natalliavasilyeva.collections.part1.task2.ImproveChatUtil;
+import org.dmdev.natalliavasilyeva.collections.part1.task2.Chat;
+import org.dmdev.natalliavasilyeva.collections.part1.task2.ChatUtils;
 import org.dmdev.natalliavasilyeva.collections.part1.task2.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,19 +24,19 @@ public class ImproveChatUtilTest {
         User user8 =  new User(8, "LEO", 80);
         User user9 =  new User(9, "TOTTI", 39);
 
-        List<ImproveChat> chats = new ArrayList<>(List.of(
-                new ImproveChat("first", List.of(user1, user2, user3)),
-                new ImproveChat("second", List.of(user4, user5, user6)),
-                new ImproveChat("third", List.of(user7, user8, user9))
+        List<Chat> chats = new ArrayList<>(List.of(
+                new Chat("first", List.of(user1, user2, user3)),
+                new Chat("second", List.of(user4, user5, user6)),
+                new Chat("third", List.of(user7, user8, user9))
         ));
 
         List<User> expectedListOfUsers = List.of(user1, user3, user5, user6, user8, user9);
         double expectedAverageAge = 38;
 
         //when
-        List<User> actualListOfUsers = ImproveChatUtil.getUsersOlderEighteenFromAllChats(chats);
-        double actualAverageAge = ImproveChatUtil.calculateAverageUsersAge(actualListOfUsers);
-        double actualAverageAgeCountByUsingIterator = ImproveChatUtil.calculateAverageUsersAgeUsingIterator(actualListOfUsers);
+        List<User> actualListOfUsers = ChatUtils.getUsersOlderEighteenFromAllChats(chats);
+        double actualAverageAge = ChatUtils.calculateAverageUsersAge(actualListOfUsers);
+        double actualAverageAgeCountByUsingIterator = ChatUtils.calculateAverageUsersAgeUsingIterator(actualListOfUsers);
 
         //then
         Assertions.assertEquals(expectedListOfUsers, actualListOfUsers);

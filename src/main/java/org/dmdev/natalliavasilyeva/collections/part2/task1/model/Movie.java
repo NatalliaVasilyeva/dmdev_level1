@@ -5,11 +5,11 @@ import java.util.Objects;
 public class Movie {
     private final int id;
     private final String year;
-    private final String month;
+    private final Month month;
     private final Genre genre;
     private final double rating;
 
-    public Movie(int id, String year, String month, Genre genre, double rating) {
+    public Movie(int id, String year, Month month, Genre genre, double rating) {
         this.id = id;
         this.year = year;
         this.month = month;
@@ -25,7 +25,7 @@ public class Movie {
         return year;
     }
 
-    public String getMonth() {
+    public Month getMonth() {
         return month;
     }
 
@@ -42,7 +42,7 @@ public class Movie {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Movie movie = (Movie) o;
-        return id == movie.id && Double.compare(movie.rating, rating) == 0 && Objects.equals(year, movie.year) && Objects.equals(month, movie.month) && genre == movie.genre;
+        return id == movie.id && Double.compare(movie.rating, rating) == 0 && Objects.equals(year, movie.year) && month == movie.month && genre == movie.genre;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Movie {
         return "Movie{" +
                 "id=" + id +
                 ", year='" + year + '\'' +
-                ", month='" + month + '\'' +
+                ", month=" + month +
                 ", genre=" + genre +
                 ", rating=" + rating +
                 '}';
