@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 /**
  * Given a one-dimensional array of integers.
- *
  * Write a function that takes this array and splits it into 3 others:
  * with only negative numbers, only positive numbers, and only zeros.
  * If there are no values for any of the arrays, then an empty array must be created.
@@ -13,13 +12,15 @@ import java.util.Arrays;
 
 public class Task3 {
     public static void main(String[] args) {
-        int [] array = {-4, 0, 1, 9, 0, -18, 3};
-        int[][] result = splitOneArrayToThree(array);
-        System.out.println(Arrays.deepToString(result));
-
+        int[] array = {-4, 0, 1, 9, 0, -18, 3};
+        printResult(splitOneArrayToThree(array));
     }
 
     public static int[][] splitOneArrayToThree(int[] array) {
+        if (array == null) {
+            return new int[][]{};
+        }
+
         int[] arrayOfNumberCountResult = countNumbersInEachCategory(array);
         int[] positiveArray = new int[arrayOfNumberCountResult[0]];
         int[] negativeArray = new int[arrayOfNumberCountResult[1]];
@@ -41,6 +42,10 @@ public class Task3 {
     }
 
     public static int[] countNumbersInEachCategory(int[] array) {
+        if (array == null) {
+            return new int[]{};
+        }
+
         int numberOfPositiveNumbers = 0;
         int numberOfNegativeNumbers = 0;
         int numberOfZeroNumbers = 0;
@@ -53,7 +58,12 @@ public class Task3 {
             } else {
                 numberOfZeroNumbers++;
             }
+
         }
         return new int[]{numberOfPositiveNumbers, numberOfNegativeNumbers, numberOfZeroNumbers};
+    }
+
+    public static void printResult(int[][] array) {
+        System.out.println(Arrays.deepToString(array));
     }
 }

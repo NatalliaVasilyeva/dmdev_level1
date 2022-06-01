@@ -17,24 +17,28 @@ public class Task1 {
         int[] array = {3, 5, -6, 3, 2, -9, 0, -123};
         int numberOfPositiveNumbers = countPositiveNumbers(array);
         int[] positiveArray = deleteNegativeNumbersFromArrayAndMultiplyToArrayLength(array, numberOfPositiveNumbers);
-
-        System.out.println(Arrays.toString(positiveArray));
+        printResult(positiveArray);
 
     }
 
-    private static int[] deleteNegativeNumbersFromArrayAndMultiplyToArrayLength(int[] array, int lengthOfNewArray) {
+    public static int[] deleteNegativeNumbersFromArrayAndMultiplyToArrayLength(int[] array, int lengthOfNewArray) {
+        if (array == null) {
+            return new int[]{};
+        }
         int[] positiveArray = new int[lengthOfNewArray];
-        int positiveArrayLength = positiveArray.length;
         int positiveArrayIndex = 0;
         for (int j : array) {
             if (j >= 0) {
-                positiveArray[positiveArrayIndex++] = j * positiveArrayLength;
+                positiveArray[positiveArrayIndex++] = j * lengthOfNewArray;
             }
         }
         return positiveArray;
     }
 
-    private static int countPositiveNumbers(int[] array) {
+    public static int countPositiveNumbers(int[] array) {
+        if (array == null) {
+            return 0;
+        }
         int numberOfPositiveNumbers = 0;
         for (int j : array) {
             if (j >= 0) {
@@ -42,5 +46,9 @@ public class Task1 {
             }
         }
         return numberOfPositiveNumbers;
+    }
+
+    public static void printResult(int[] array) {
+        System.out.println(Arrays.toString(array));
     }
 }

@@ -15,15 +15,20 @@ import java.util.Arrays;
 public class Task2 {
 
     public static void main(String[] args) {
-        char[] charArray = {'a', '6', 'y', 'P', 'T', 'q', '9', '+'};
+        char[] charArray = {'a', '6', 'y', 'P', 'T', 'q', '9', '+' };
         int[] integerArray = convertArrayOfCharToArrayOfInteger(charArray);
-        System.out.println(Arrays.toString(integerArray));
         double averageValue = calculateAverageValueOfIntegerArray(integerArray);
         printElementsGreaterAverage(integerArray, averageValue);
+
+        double averageValue1 = calculateAverageValueOfIntegerArray(null);
+        printElementsGreaterAverage(null, averageValue1);
 
     }
 
     public static int[] convertArrayOfCharToArrayOfInteger(char[] charArray) {
+        if (charArray == null) {
+            return new int[]{};
+        }
         int charArrayLength = charArray.length;
         int[] intArray = new int[charArrayLength];
 
@@ -34,24 +39,26 @@ public class Task2 {
     }
 
     public static double calculateAverageValueOfIntegerArray(int[] integerArray) {
-        int arrayLength = integerArray.length;
-        double result;
-        if (arrayLength != 0) {
-            int sum = 0;
-            for (int j : integerArray) {
-                sum += j;
-            }
-            result = sum / arrayLength;
-        } else {
-            throw new NullPointerException("Array is empty");
+        if (integerArray == null) {
+            return 0.0;
         }
-        return result;
+        int arrayLength = integerArray.length;
+        int sum = 0;
+        for (int j : integerArray) {
+            sum += j;
+        }
+        return sum / (double) arrayLength;
     }
 
+
     public static void printElementsGreaterAverage(int[] array, double averageValue) {
-        for (int j : array) {
-            if (j > averageValue) {
-                System.out.println(j);
+        if (array == null) {
+            System.out.println("Array is null");
+        } else {
+            for (int j : array) {
+                if (j > averageValue) {
+                    System.out.println(j);
+                }
             }
         }
     }
