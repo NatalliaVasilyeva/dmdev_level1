@@ -4,6 +4,8 @@ import org.dmdev.natalliavasilyeva.oop.model.Flat;
 import org.dmdev.natalliavasilyeva.oop.model.Floor;
 import org.dmdev.natalliavasilyeva.oop.model.House;
 import org.dmdev.natalliavasilyeva.oop.model.Room;
+
+import java.util.Objects;
 /*
 Represent the following model in the form of classes and their composition.
 - Each house contains its own number (int) and a set of floors (array).
@@ -29,20 +31,47 @@ public class Main {
         Floor floor1 = new Floor(1, new Flat[]{flat1, flat2});
         Floor floor2 = new Floor(2, new Flat[]{flat1});
         House house1 = new House(1, new Floor[]{floor1, floor2});
+        House house2 = new House(3, new Floor[]{});
 
         printAllInformation(house1);
+        printAllInformation(house2);
     }
 
     public static void printAllInformation(House house) {
-        house.print();
-        for (Floor floor : house.getFloors()) {
-            floor.print();
-            for (Flat flat : floor.getFlats()) {
-                flat.print();
-                for (Room room : flat.getRooms()) {
-                    room.print();
+        if (!Objects.isNull(house)) {
+            if (!Objects.isNull(house.getFloors())) {
+                house.print();
+                for (Floor floor : house.getFloors()) {
+                    if (!Objects.isNull(floor.getFlats())) {
+                        floor.print();
+                        for (Flat flat : floor.getFlats()) {
+                            if (!Objects.isNull(flat.getRooms())) {
+                                flat.print();
+                                for (Room room : flat.getRooms()) {
+                                    room.print();
+                                }
+                            } else {
+                                printError("Flat");
+                            }
+                        }
+                    } else {
+                        printError("Floor");
+                    }
                 }
+            } else {
+                printError("House");
             }
+        } else {
+            printError("");
+        }
+    }
+
+
+    private static void printError(String objectName) {
+        if("".equals(objectName)) {
+            System.out.printf("%s is null. Can not print any other information%n", objectName);
+        } else {
+            System.out.printf("%s has null field. Can not print any other information%n", objectName);
         }
     }
 }
