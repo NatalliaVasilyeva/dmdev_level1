@@ -13,7 +13,7 @@ public class Task1 {
 
     public static void main(String[] args) {
         String string = "abc Cpddd Dio OsfWw";
-        System.out.println(removeDublicates(string));
+        printResult(removeDublicates(string));
     }
 
     public static String removeDublicates(String inputString) {
@@ -38,5 +38,9 @@ public class Task1 {
             }
         }
         return sb.toString();
+    }
+
+    public static void printResult(String result) {
+        System.out.println(result);
     }
 }
