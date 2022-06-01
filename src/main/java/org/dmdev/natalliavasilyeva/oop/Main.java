@@ -68,7 +68,7 @@ public class Main {
 
 
     private static void printError(String objectName) {
-        if("".equals(objectName)) {
+        if ("".equals(objectName)) {
             System.out.printf("%s is null. Can not print any other information%n", objectName);
         } else {
             System.out.printf("%s has null field. Can not print any other information%n", objectName);
