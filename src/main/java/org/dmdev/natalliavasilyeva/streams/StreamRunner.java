@@ -1,5 +1,7 @@
 package org.dmdev.natalliavasilyeva.streams;
 
+import org.dmdev.natalliavasilyeva.streams.dto.StudentFullNameAndAverageMarkDto;
+import org.dmdev.natalliavasilyeva.streams.dto.StudentFullNameDto;
 import org.dmdev.natalliavasilyeva.streams.model.Student;
 import org.dmdev.natalliavasilyeva.streams.utils.MarkUtils;
 import org.dmdev.natalliavasilyeva.streams.utils.StudentUtils;
@@ -30,10 +32,13 @@ public class StreamRunner {
         Map<Integer, Double> averageMarksOnCourse = StudentUtils.getAverageMarksOnCourse(students);
         System.out.println(averageMarksOnCourse);
 
-        Map<Integer, List<String>> listOfStudentsFullNameOnEachCourse = StudentUtils.getStudentsFullNameOnCourse(students);
-        System.out.println(listOfStudentsFullNameOnEachCourse);
+        Map<Integer, List<StudentFullNameDto>> listOfStudentsFullNameOnEachCourseWithCollectingAndThen = StudentUtils.getStudentsFullNameOnCourseWithCollectingAndThen(students);
+        System.out.println(listOfStudentsFullNameOnEachCourseWithCollectingAndThen);
 
-        Map<Integer, Map<Double, List<String>>> studentsFullNameWithAverageMarkOnCourses = StudentUtils.getStudentsFullNameWithAverageMarkOnCourse(students);
+        Map<Integer, List<StudentFullNameDto>> listOfStudentsFullNameOnEachCourseWithMapping = StudentUtils.getStudentsFullNameOnCourseWithMapping(students);
+        System.out.println(listOfStudentsFullNameOnEachCourseWithMapping);
+
+        Map<Integer, StudentFullNameAndAverageMarkDto> studentsFullNameWithAverageMarkOnCourses = StudentUtils.getStudentsFullNameWithAverageMarkOnCourse(students);
         System.out.println(studentsFullNameWithAverageMarkOnCourses);
 
     }
