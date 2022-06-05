@@ -4,10 +4,17 @@ import org.dmdev.natalliavasilyeva.streams.dto.StudentFullNameAndAverageMarkDto;
 import org.dmdev.natalliavasilyeva.streams.dto.StudentFullNameDto;
 import org.dmdev.natalliavasilyeva.streams.model.Student;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.averagingDouble;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
 
 public final class StudentUtils {
 

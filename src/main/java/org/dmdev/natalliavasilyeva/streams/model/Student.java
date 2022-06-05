@@ -1,9 +1,7 @@
 package org.dmdev.natalliavasilyeva.streams.model;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class Student {
 
@@ -33,10 +31,6 @@ public class Student {
 
     public List<Mark> getMarks() {
         return marks;
-    }
-
-    public String getFullName() {
-        return name + " " + surname;
     }
 
     public double getAverageMark() {

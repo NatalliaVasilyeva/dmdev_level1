@@ -23,9 +23,8 @@ public class StudentFullNameAndAverageMarkDto {
 
     @Override
     public String toString() {
-        return "StudentFullNameAndAverageMarkDto{" +
-                "studentFullNameDto=" + studentFullNameDto +
-                ", averageMark=" + averageMark +
-                '}';
+        return "Students " +
+                getStudentFullNameDto() +
+                " have averageMark = " + getAverageMark();
     }
 }

@@ -21,9 +21,7 @@ public class StudentFullNameDto {
 
     @Override
     public String toString() {
-        return "StudentFullNameDto{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
+        return "Student with full name is " +
+                getName() + ' ' + getSurname();
     }
 }
