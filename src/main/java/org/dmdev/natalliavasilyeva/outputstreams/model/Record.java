@@ -18,8 +18,8 @@ public class Record {
         this.lineKeeper = lineKeeper;
     }
 
-    public void put(String key, String val) {
-        lineKeeper.put(key, val);
+    public void put(String key, String value) {
+        lineKeeper.put(key, value);
     }
 
     public String get(String key) {

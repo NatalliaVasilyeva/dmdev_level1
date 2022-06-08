@@ -1,7 +1,9 @@
 package org.dmdev.natalliavasilyeva.outputstreams;
 
 import org.dmdev.natalliavasilyeva.outputstreams.model.Record;
+import org.dmdev.natalliavasilyeva.outputstreams.utils.CommonUtils;
 import org.dmdev.natalliavasilyeva.outputstreams.utils.ReadUtils;
+import org.dmdev.natalliavasilyeva.outputstreams.utils.WriteUtils;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -11,25 +13,25 @@ public class CsvRunner {
     public static void main(String[] args) throws IOException {
 
         Path pricePath = Path.of("src", "main", "resources", "items-price.csv");
-        Path namePath = Path.of("src", "main", "resources", "items-name.csv");
+        Path descriptionPath = Path.of("src", "main", "resources", "items-description.csv");
 
         List<String> priceColumns = ReadUtils.readColumnNamesFromFile(pricePath);
-        List<Record> priceRecords = ReadUtils.readDataFromFile(pricePath, priceColumns);
+        Map<String, Record> priceRecords = ReadUtils.readDataFromFile(pricePath, priceColumns);
 
-        List<String> nameColumns = ReadUtils.readColumnNamesFromFile(namePath);
-        List<Record> nameRecords = ReadUtils.readDataFromFile(namePath, nameColumns);
+        List<String> nameColumns = ReadUtils.readColumnNamesFromFile(descriptionPath);
+        Map<String, Record> nameRecords = ReadUtils.readDataFromFile(descriptionPath, nameColumns);
 
-        Set<String> combineColumns = ReadUtils.combineTwoLists(priceColumns, nameColumns);
-
+        Set<String> combineColumns = CommonUtils.combineTwoLists(priceColumns, nameColumns);
 
         Set<String> ids = new TreeSet<>();
-        Set<Record> records = ReadUtils.mergeListsOfRecordsToOneStream("ID", priceRecords, nameRecords, ids);
+        Set<Record> records = CommonUtils.mergeTwoMapsToOneRecordsSet(priceRecords, nameRecords, ids);
 
         Path resultPath = Path.of("src", "main", "resources", "task1-result.txt");
-        ReadUtils.writeResult(resultPath, combineColumns, records, Set.of("DESCRIPTION"));
+        Set<String> setOfExcludingFields = Set.of("DESCRIPTION");
+        WriteUtils.writeResult(resultPath, combineColumns, records, setOfExcludingFields);
 
         Path idsPath = Path.of("src", "main", "resources", "wrong-result.txt");
-        ReadUtils.writeIds(idsPath, ids);
+        WriteUtils.writeIds(idsPath, ids);
 
     }
 }
