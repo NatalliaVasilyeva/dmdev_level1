@@ -1,12 +1,12 @@
 package org.dmdev.natalliavasilyeva.multithreading.model;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Planet {
     private final Object lock = new Object();
-    private final List<Crystal> planet = new LinkedList<>();
+    private final List<Crystal> planet = new CopyOnWriteArrayList<>();
 
     public Planet() {
     }
@@ -22,7 +22,7 @@ public class Planet {
     public List<Crystal> removeAll() {
         List<Crystal> crystals = new ArrayList<>(planet);
         planet.clear();
-        return  crystals;
+        return crystals;
     }
 
     public int size() {
@@ -30,7 +30,7 @@ public class Planet {
     }
 
     public boolean isNotEmpty() {
-        return  !planet.isEmpty();
+        return !planet.isEmpty();
     }
 
     public Object getLock() {

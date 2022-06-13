@@ -4,7 +4,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Race {
 
@@ -16,13 +15,13 @@ public class Race {
     }
 
     public void addCrystals(List<Crystal> list) {
-       list.forEach(crystal -> {
-           if (crystals.isEmpty() || crystals.get(crystal.getColor()) == null) {
-               crystals.put(crystal.getColor(), 1);
-           } else {
-               crystals.put(crystal.getColor(), crystals.get(crystal.getColor()) + 1);
-           }
-       });
+        list.forEach(crystal -> {
+            if (crystals.isEmpty() || crystals.get(crystal.getColor()) == null) {
+                crystals.put(crystal.getColor(), 1);
+            } else {
+                crystals.put(crystal.getColor(), crystals.get(crystal.getColor()) + 1);
+            }
+        });
     }
 
     public boolean isFull() {

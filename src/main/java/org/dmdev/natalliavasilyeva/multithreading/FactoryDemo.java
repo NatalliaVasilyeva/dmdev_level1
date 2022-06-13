@@ -8,6 +8,9 @@ import org.dmdev.natalliavasilyeva.multithreading.thread.RaceRocket;
 import org.dmdev.natalliavasilyeva.multithreading.util.ThreadUtil;
 
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class FactoryDemo {
 
@@ -21,9 +24,14 @@ public class FactoryDemo {
         RaceRocket fireRaceRocket = new RaceRocket(fireRace, factory.getPlanet(), night);
         RaceRocket airRaceRocket = new RaceRocket(airRace, factory.getPlanet(), night);
 
-        ThreadUtil.startThreads(List.of(night, factory, fireRaceRocket, airRaceRocket, crystalsChecker));
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleWithFixedDelay(crystalsChecker, 1, 50, TimeUnit.MILLISECONDS);
 
-        ThreadUtil.joinThreads(List.of(night, factory, fireRaceRocket, airRaceRocket, crystalsChecker));
+        ThreadUtil.startThreads(List.of(night, factory, fireRaceRocket, airRaceRocket));
+
+        ThreadUtil.joinThreads(List.of(night, factory, fireRaceRocket, airRaceRocket));
+
+        executorService.shutdown();
 
         viewStatistic(airRaceRocket.getRace(), fireRaceRocket.getRace());
     }
