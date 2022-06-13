@@ -3,31 +3,40 @@ package org.dmdev.natalliavasilyeva.multithreading.thread;
 import org.dmdev.natalliavasilyeva.multithreading.util.NightConst;
 import org.dmdev.natalliavasilyeva.multithreading.util.ThreadUtil;
 
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 
 public class Night extends Thread {
 
     private int count = 1;
-    private final Object lock = new Object();
+    private final Lock lock = new ReentrantLock();
+    private final Condition condition = lock.newCondition();
 
     @Override
     public void run() {
-            synchronized (lock) {
-                while (!ThreadUtil.isInterruptNecessary.get()) {
-                    try {
-                        System.out.printf("----------------\nNight %s started\n", (count++));
-                        lock.notifyAll();
-                        lock.wait(NightConst.NIGHT_INTERVAL);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+        lock.lock();
+        try {
+            while (!ThreadUtil.isInterruptNecessary.get()) {
+                System.out.printf("----------------\nNight %s started\n", (count++));
+                condition.signalAll();
+                condition.await(NightConst.NIGHT_INTERVAL, TimeUnit.MILLISECONDS);
             }
-        synchronized (lock) {
-            lock.notifyAll();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            condition.signalAll();
+            lock.unlock();
         }
     }
 
-    public Object getLock() {
+    public Lock getLock() {
         return lock;
+    }
+
+    public Condition getCondition() {
+        return condition;
     }
 }

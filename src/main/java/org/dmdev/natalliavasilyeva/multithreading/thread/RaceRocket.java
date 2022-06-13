@@ -1,15 +1,15 @@
 package org.dmdev.natalliavasilyeva.multithreading.thread;
 
-import org.dmdev.natalliavasilyeva.multithreading.model.Color;
 import org.dmdev.natalliavasilyeva.multithreading.model.Crystal;
 import org.dmdev.natalliavasilyeva.multithreading.model.Planet;
 import org.dmdev.natalliavasilyeva.multithreading.model.Race;
-import org.dmdev.natalliavasilyeva.multithreading.util.NightConst;
 import org.dmdev.natalliavasilyeva.multithreading.util.RandomUtil;
 import org.dmdev.natalliavasilyeva.multithreading.util.ThreadUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 
 public class RaceRocket extends Thread {
 
@@ -41,7 +41,8 @@ public class RaceRocket extends Thread {
     private List<Crystal> gatherCrystalsFromFactory() {
         int crystalNumber = RandomUtil.getRandomNumberUsingInts(MIN_CRYSTAL_COUNT, MAX_CRYSTAL_COUNT + 1);
         List<Crystal> gatheredCrystalsFromFactory = new ArrayList<>(MAX_CRYSTAL_COUNT);
-        synchronized (planet.getLock()) {
+        planet.getLock().lock();
+        try {
             if (planet.size() <= crystalNumber) {
                 gatheredCrystalsFromFactory.addAll(planet.removeAll());
             } else if (planet.isNotEmpty()) {
@@ -51,19 +52,33 @@ public class RaceRocket extends Thread {
                 }
             }
             System.out.printf("%s race rocket gathered next crystal: %s\n", race.getName(), gatheredCrystalsFromFactory);
+        } finally {
+            planet.getLock().unlock();
         }
 
         return gatheredCrystalsFromFactory;
     }
 
     private void waitNextNight() throws InterruptedException {
-        synchronized (night.getLock()) {
-            night.getLock().wait();
-        }
+        Lock lock = getNightLock();
+        Condition condition = getNightCondition();
+
+        lock.lock();
+        condition.await();
+        lock.unlock();
+
     }
 
     public Race getRace() {
         return race;
+    }
+
+    private Lock getNightLock() {
+        return night.getLock();
+    }
+
+    private Condition getNightCondition() {
+        return night.getCondition();
     }
 
 }

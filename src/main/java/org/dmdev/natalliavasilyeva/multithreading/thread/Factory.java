@@ -6,6 +6,9 @@ import org.dmdev.natalliavasilyeva.multithreading.model.Planet;
 import org.dmdev.natalliavasilyeva.multithreading.util.RandomUtil;
 import org.dmdev.natalliavasilyeva.multithreading.util.ThreadUtil;
 
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+
 public class Factory extends Thread {
 
     private static final int MIN_CRYSTAL_COUNT = 2;
@@ -17,7 +20,6 @@ public class Factory extends Thread {
         this.planet = new Planet();
         this.night = night;
     }
-
 
     @Override
     public void run() {
@@ -33,22 +35,41 @@ public class Factory extends Thread {
 
     private void throwCrystals() {
         int numberOfCrystalsForThrowingToPlanet = RandomUtil.getRandomNumberUsingInts(MIN_CRYSTAL_COUNT, MAX_CRYSTAL_COUNT + 1);
-        synchronized (planet.getLock()) {
+        getPlanetLock().lock();
+        try {
             for (int j = 0; j < numberOfCrystalsForThrowingToPlanet; j++) {
                 Color color = Color.COLOR_VALUES.get(RandomUtil.getNext(Color.COLOR_VALUES.size()));
                 planet.add(new Crystal(color));
             }
             System.out.println("Factory threw out crystals. Count: " + numberOfCrystalsForThrowingToPlanet);
+        } finally {
+            getPlanetLock().unlock();
         }
     }
 
     private void waitNextNight() throws InterruptedException {
-        synchronized (night.getLock()) {
-            night.getLock().wait();
-        }
+        Lock lock = getNightLock();
+        Condition condition  = getNightCondition();
+
+        lock.lock();
+        condition.await();
+        lock.unlock();
+
     }
 
     public Planet getPlanet() {
         return planet;
+    }
+
+    private Lock getPlanetLock() {
+        return planet.getLock();
+    }
+
+    private Lock getNightLock() {
+        return night.getLock();
+    }
+
+    private Condition getNightCondition() {
+        return night.getCondition();
     }
 }

@@ -3,9 +3,14 @@ package org.dmdev.natalliavasilyeva.multithreading.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Planet {
-    private final Object lock = new Object();
+    private final Lock lock = new ReentrantLock();
+
+    private final Condition condition = lock.newCondition();
     private final List<Crystal> planet = new CopyOnWriteArrayList<>();
 
     public Planet() {
@@ -33,8 +38,12 @@ public class Planet {
         return !planet.isEmpty();
     }
 
-    public Object getLock() {
+    public Lock getLock() {
         return lock;
+    }
+
+    public Condition getCondition() {
+        return condition;
     }
 
 }
