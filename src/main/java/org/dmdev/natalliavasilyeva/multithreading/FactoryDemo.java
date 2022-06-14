@@ -24,15 +24,14 @@ public class FactoryDemo {
         RaceRocket fireRaceRocket = new RaceRocket(fireRace, factory.getPlanet(), night);
         RaceRocket airRaceRocket = new RaceRocket(airRace, factory.getPlanet(), night);
 
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleWithFixedDelay(crystalsChecker, 1, 50, TimeUnit.MILLISECONDS);
+        ScheduledExecutorService schedulerExecutorService = Executors.newSingleThreadScheduledExecutor();
+        schedulerExecutorService.scheduleWithFixedDelay(crystalsChecker, 1, 50, TimeUnit.MILLISECONDS);
 
         ThreadUtil.startThreads(List.of(night, factory, fireRaceRocket, airRaceRocket));
 
         ThreadUtil.joinThreads(List.of(night, factory, fireRaceRocket, airRaceRocket));
 
-        executorService.shutdown();
-
+        schedulerExecutorService.shutdown();
         viewStatistic(airRaceRocket.getRace(), fireRaceRocket.getRace());
     }
 
