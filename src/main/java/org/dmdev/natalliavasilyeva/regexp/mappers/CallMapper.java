@@ -1,7 +1,7 @@
 package org.dmdev.natalliavasilyeva.regexp.mappers;
 
-import org.dmdev.natalliavasilyeva.regexp.dto.Call;
-import org.dmdev.natalliavasilyeva.regexp.dto.Complaint;
+import org.dmdev.natalliavasilyeva.regexp.model.Call;
+import org.dmdev.natalliavasilyeva.regexp.model.Complaint;
 
 public final class CallMapper {
     private CallMapper() {

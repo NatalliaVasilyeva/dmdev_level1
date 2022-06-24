@@ -1,6 +1,6 @@
 package org.dmdev.natalliavasilyeva.regexp.parser;
 
-import org.dmdev.natalliavasilyeva.regexp.dto.Complaint;
+import org.dmdev.natalliavasilyeva.regexp.model.Complaint;
 import org.dmdev.natalliavasilyeva.regexp.utils.PhoneUtils;
 import org.dmdev.natalliavasilyeva.regexp.utils.StringUtils;
 

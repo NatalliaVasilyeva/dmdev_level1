@@ -1,6 +1,6 @@
 package org.dmdev.natalliavasilyeva.regexp.writer;
 
-import org.dmdev.natalliavasilyeva.regexp.dto.Entity;
+import org.dmdev.natalliavasilyeva.regexp.model.Entity;
 import org.dmdev.natalliavasilyeva.regexp.utils.StringUtils;
 
 import java.io.IOException;
@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 import static java.nio.file.StandardOpenOption.CREATE;
-
 
 public class LogFileWriter {
 

@@ -1,6 +1,6 @@
 package org.dmdev.natalliavasilyeva.regexp.workers;
 
-import org.dmdev.natalliavasilyeva.regexp.dto.Complaint;
+import org.dmdev.natalliavasilyeva.regexp.model.Complaint;
 import org.dmdev.natalliavasilyeva.regexp.parser.LogFileParser;
 
 import java.io.IOException;

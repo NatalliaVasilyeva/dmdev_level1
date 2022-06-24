@@ -1,6 +1,6 @@
 package org.dmdev.natalliavasilyeva.regexp.workers;
 
-import org.dmdev.natalliavasilyeva.regexp.dto.Complaint;
+import org.dmdev.natalliavasilyeva.regexp.model.Complaint;
 import org.dmdev.natalliavasilyeva.regexp.parser.LogFileParser;
 import org.dmdev.natalliavasilyeva.regexp.utils.RandomUtil;
 import org.dmdev.natalliavasilyeva.regexp.writer.LogFileWriter;

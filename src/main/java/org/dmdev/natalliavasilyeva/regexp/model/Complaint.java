@@ -1,4 +1,4 @@
-package org.dmdev.natalliavasilyeva.regexp.dto;
+package org.dmdev.natalliavasilyeva.regexp.model;
 
 import org.dmdev.natalliavasilyeva.regexp.utils.DateFormatter;
 
@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Complaint implements Entity {
-
     private final int id;
     private final LocalDateTime date;
     private final String name;
